@@ -1,9 +1,9 @@
 ﻿using FluentMigrator;
 using Nop.Data.Migrations;
 
-namespace Nop.Plugin.Misc.ConnectApi.Migrations
+namespace Nop.Plugin.Misc.Events.Migrations
 {
-    [NopMigration("", "Nop.Plugin.Misc.ConnectApi schema", MigrationProcessType.Installation)]
+    [NopMigration("", "Nop.Plugin.Misc.Events schema", MigrationProcessType.Installation)]
     public class SchemaMigration : AutoReversingMigration
     {
         private readonly IMigrationManager _migrationManager;

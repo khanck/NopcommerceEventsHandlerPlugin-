@@ -2,7 +2,7 @@
 using Nop.Web.Framework.Components;
 using System;
 
-namespace Nop.Plugin.Misc.ConnectApi.Components
+namespace Nop.Plugin.Misc.Events.Components
 {
     [ViewComponent(Name = "Custom")]
     public class CustomViewComponent : NopViewComponent

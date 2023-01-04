@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Nop.Plugin.Misc.ConnectApi.Mapping
+namespace Nop.Plugin.Misc.Events.Mapping
 {
     public partial class NameCompatibility : INameCompatibility
     {

@@ -1,6 +1,6 @@
 using Nop.Core;
-using Nop.Plugin.Misc.ConnectApi.Models;
-using Nop.Plugin.Misc.ConnectApi.Services;
+using Nop.Plugin.Misc.Events.Models;
+using Nop.Plugin.Misc.Events.Services;
 using Nop.Services.Cms;
 using Nop.Services.Common;
 using Nop.Services.Configuration;
@@ -14,12 +14,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nop.Plugin.Misc.ConnectApi
+namespace Nop.Plugin.Misc.Events
 {
     /// <summary>
     /// Rename this file and change to the correct type
     /// </summary>
-    public class ConnectApiPlugin : BasePlugin, IMiscPlugin, IAdminMenuPlugin
+    public class EventsPlugin : BasePlugin, IMiscPlugin, IAdminMenuPlugin
     {
         #region Fields
         private readonly ISettingService _settingService;
@@ -27,31 +27,31 @@ namespace Nop.Plugin.Misc.ConnectApi
         private readonly IWebHelper _webHelper;
         private readonly IPermissionService _permissionService;
         private readonly IPermissionProvider _permissionProvider;
-        private readonly IPluginManager<ConnectApiPlugin> _pluginManager;
+        private readonly IPluginManager<EventsPlugin> _pluginManager;
 
         #endregion
-        public ConnectApiPlugin(
+        public EventsPlugin(
             ISettingService settingService,
             ILocalizationService localizationService,
             IWebHelper webHelper,
             IPermissionService permissionService,
-            IPluginManager<ConnectApiPlugin> pluginManager
+            IPluginManager<EventsPlugin> pluginManager
             )
         {
             _settingService = settingService;
             _localizationService = localizationService;
             _webHelper = webHelper;
             _permissionService = permissionService;
-            _permissionProvider = new ConnectApiPermissionProvider();
+            _permissionProvider = new EventsPermissionProvider();
             _pluginManager = pluginManager;
 
         }
         public override async Task InstallAsync()
         {
             //settings
-            var settings = new ConnectApiSettings()
+            var settings = new EventsSettings()
             {
-                ConnectApiEnabled = true
+                EventsEnabled = true
             };
 
             await _settingService.SaveSettingAsync(settings);
@@ -59,13 +59,10 @@ namespace Nop.Plugin.Misc.ConnectApi
             //locales
             await _localizationService.AddOrUpdateLocaleResourceAsync(new Dictionary<string, string>
             {
-                ["ConnectApi.Enabled"] = "ConnectApi Enabled",
-                ["ConnectApi.ConnectApiApiUrl"] = "Api Url",
-                ["ConnectApi.ConnectApiApiUser"] = "Api User Name",
-                ["ConnectApi.ConnectApiApiPass"] = "Api Password",
-
+                ["Events.Enabled"] = "Events Enabled",
+              
                 //menu 
-                ["ConnectApi.ConnectApi"] = "API",
+                ["Events.Events"] = "Events",
               
 
               
@@ -81,9 +78,9 @@ namespace Nop.Plugin.Misc.ConnectApi
 
         public override async Task UninstallAsync()
         {
-            await _settingService.DeleteSettingAsync<ConnectApiSettings>();
+            await _settingService.DeleteSettingAsync<EventsSettings>();
 
-            await _localizationService.DeleteLocaleResourcesAsync("ConnectApi");
+            await _localizationService.DeleteLocaleResourcesAsync("Events");
 
             // permissions
             await _permissionService.UninstallPermissionsAsync(_permissionProvider);
@@ -97,19 +94,19 @@ namespace Nop.Plugin.Misc.ConnectApi
 
         public override string GetConfigurationPageUrl()
         {
-            return $"{_webHelper.GetStoreLocation()}Admin/ConnectApi/Configure";
+            return $"{_webHelper.GetStoreLocation()}Admin/Events/Configure";
         }
 
         public async Task ManageSiteMapAsync(SiteMapNode rootNode)
         {
             var pl = _pluginManager.LoadAllPluginsAsync();
 
-            if (!_pluginManager.IsPluginActive(this, new List<string> { ConnectApiDefaults.PluginSystemName }))
+            if (!_pluginManager.IsPluginActive(this, new List<string> { EventsDefaults.PluginSystemName }))
                 return;
 
             if (
-                !await _permissionService.AuthorizeAsync(ConnectApiPermissionProvider.ManageConnectApiPlugin) &&
-                !await _permissionService.AuthorizeAsync(ConnectApiPermissionProvider.ManageConnectApi))
+                !await _permissionService.AuthorizeAsync(EventsPermissionProvider.ManageEventsPlugin) &&
+                !await _permissionService.AuthorizeAsync(EventsPermissionProvider.ManageEvents))
                 return;
 
            

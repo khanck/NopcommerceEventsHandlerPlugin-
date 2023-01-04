@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nop.Plugin.Misc.ConnectApi.Services
+namespace Nop.Plugin.Misc.Events.Services
 {
-    public partial class ConnectApiPermissionProvider : IPermissionProvider
+    public partial class EventsPermissionProvider : IPermissionProvider
     {
         //admin area permissions
-        public static readonly PermissionRecord ManageConnectApiPlugin = new() { Name = "Connect Api. Manage Plugin", SystemName = "ManageConnectApiPlugin", Category = "Standard" };
-        public static readonly PermissionRecord ManageConnectApi = new() { Name = "Connect Api.Connect to api ", SystemName = "ManageConnectApiItems", Category = "Standard" };
+        public static readonly PermissionRecord ManageEventsPlugin = new() { Name = "Connect Api. Manage Plugin", SystemName = "ManageEventsPlugin", Category = "Standard" };
+        public static readonly PermissionRecord ManageEvents = new() { Name = "Connect Api.Connect to api ", SystemName = "ManageEventsItems", Category = "Standard" };
 
 
         public HashSet<(string systemRoleName, PermissionRecord[] permissions)> GetDefaultPermissions()
@@ -24,8 +24,8 @@ namespace Nop.Plugin.Misc.ConnectApi.Services
                     NopCustomerDefaults.AdministratorsRoleName,
                     new[]
                     {
-                        ManageConnectApiPlugin,
-                        ManageConnectApi
+                        ManageEventsPlugin,
+                        ManageEvents
                     }
                 )
             };
@@ -35,8 +35,8 @@ namespace Nop.Plugin.Misc.ConnectApi.Services
         {
             return new[]
             {
-                ManageConnectApiPlugin,
-                ManageConnectApi
+                ManageEventsPlugin,
+                ManageEvents
             };
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nop.Plugin.Misc.ConnectApi.Infrastructure
+namespace Nop.Plugin.Misc.Events.Infrastructure
 {
     public class ViewLocationExpander : IViewLocationExpander
     {
@@ -14,11 +14,11 @@ namespace Nop.Plugin.Misc.ConnectApi.Infrastructure
         {
             if (context.AreaName == "Admin")
             {
-                viewLocations = new[] { $"/Plugins/Nop.Plugin.Misc.ConnectApi/Areas/Admin/Views/{context.ControllerName}/{context.ViewName}.cshtml" }.Concat(viewLocations);
+                viewLocations = new[] { $"/Plugins/Nop.Plugin.Misc.Events/Areas/Admin/Views/{context.ControllerName}/{context.ViewName}.cshtml" }.Concat(viewLocations);
             }
             else
             {
-                viewLocations = new[] { $"/Plugins/Nop.Plugin.Misc.ConnectApi/Views/{context.ControllerName}/{context.ViewName}.cshtml" }.Concat(viewLocations);
+                viewLocations = new[] { $"/Plugins/Nop.Plugin.Misc.Events/Views/{context.ControllerName}/{context.ViewName}.cshtml" }.Concat(viewLocations);
             }
 
             return viewLocations;

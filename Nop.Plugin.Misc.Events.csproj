@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-	  <OutputPath>..\..\Presentation\Nop.Web\Plugins\Nop.Plugin.Misc.ConnectApi</OutputPath>
+	  <OutputPath>..\..\Presentation\Nop.Web\Plugins\Nop.Plugin.Misc.Events</OutputPath>
+	  <OutputPath>..\..\Presentation\Nop.Web\Plugins\Nop.Plugin.Misc.Events</OutputPath>
     <OutDir>$(OutputPath)</OutDir>
     <!--Set this parameter to true to get the dlls copied from the NuGet cache to the output of your project.
     You need to set this parameter to true if your plugin has a nuget package 
@@ -14,7 +15,6 @@
     <None Remove="logo.jpg" />
 	<None Remove="plugin.json" />
     <None Remove="Areas\Admin\Views\_ViewImports.cshtml" />
-    <None Remove="Views\GetAllEmployees.cshtml" />
     <None Remove="Views\Shared\Table.cshtml" />
   </ItemGroup>
 
@@ -24,9 +24,6 @@
     </Content>
     <Content Include="plugin.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\GetAllEmployees.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Shared\Table.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -55,6 +52,7 @@
     <Folder Include="Areas\Admin\Extensions\" />
     <Folder Include="Areas\Admin\Factories\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Extensions\" />
     <Folder Include="Factories\" />
     <Folder Include="NewFolder\" />
@@ -62,7 +60,7 @@
  
   <!-- This target execute after "Build" target -->
   <Target Name="NopTarget" AfterTargets="Build">
-    <MSBuild Projects="@(ClearPluginAssemblies)" Properties="PluginPath=$(MSBuildProjectDirectory)\$(OutDir)" Targets="NopClear" />
+  
   </Target>
 
 </Project>
